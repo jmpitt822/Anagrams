@@ -12,24 +12,47 @@ public class Anagrams {
 
         String firstWord = getFirstWord(scanner);
         String secondWord = getSecondWord(scanner);
-        compareWords(firstWord, secondWord);
+        char[] firstArray = convertToArray(firstWord);
+        char[] secondArray = convertToArray(secondWord);
+        List<Character> firstList = convertToList(firstArray);
+        List<Character> secondList = convertToList(secondArray);
+        sortAndCompare(firstList, secondList);
+
     }
 
-    private static List getFirstWord(Scanner scanner) {
-        System.out.println("Please enter a word:");
-        String firstWord = scanner.nextLine();
-        ArrayList<Character> firstList = firstWord.
-        return
+    private static String getFirstWord(Scanner scanner) {
+        System.out.println("Please enter a word or phrase:");
+        return scanner.nextLine().toLowerCase();
     }
 
     private static String getSecondWord(Scanner scanner) {
-        System.out.println("Please enter a second word:");
-        return scanner.nextLine();
+        System.out.println("Please enter a second word or phrase:");
+        return scanner.nextLine().toLowerCase();
     }
 
-    private static Boolean compareWords(String firstWord, String secondWord) {
-        char[] firstList = firstWord.toCharArray();
+    private static char[] convertToArray(String word) {
+        return word.toCharArray();
+    }
 
+    private static List<Character> convertToList(char[] arrayOfLetters) {
+        List<Character> listOfCharacters = new ArrayList<>();
+        for(int i = 0; i < arrayOfLetters.length; i++) {
+            if(arrayOfLetters[i] != ' ') {
+                listOfCharacters.add(arrayOfLetters[i]);
+            }
+        }
+        return listOfCharacters;
+    }
+
+    private static void sortAndCompare(List<Character> firstList, List<Character> secondList){
         Collections.sort(firstList);
+        Collections.sort(secondList);
+        if (firstList.equals(secondList)){
+            System.out.println("Yes, that is an anagram!");
+        } else {
+            System.out.println("Nope, that's not an anagram...");
+        }
     }
+
+
 }
