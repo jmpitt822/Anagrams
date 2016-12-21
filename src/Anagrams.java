@@ -7,21 +7,29 @@ import java.util.Scanner;
  * Created by jeremypitt on 12/19/16.
  */
 public class Anagrams {
+    static String end = "";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String firstWord = getFirstWord(scanner);
-        String secondWord = getSecondWord(scanner);
-        char[] firstArray = convertToArray(firstWord);
-        char[] secondArray = convertToArray(secondWord);
-        List<Character> firstList = convertToList(firstArray);
-        List<Character> secondList = convertToList(secondArray);
-        sortAndCompare(firstList, secondList);
+        while (end == "") {
+            String firstWord = getFirstWord(scanner);
+            if (firstWord.equals("/exit")) {
+                System.exit(0);
+            }
+            String secondWord = getSecondWord(scanner);
+            char[] firstArray = convertToArray(firstWord);
+            char[] secondArray = convertToArray(secondWord);
+            List<Character> firstList = convertToList(firstArray);
+            List<Character> secondList = convertToList(secondArray);
+            sortAndCompare(firstList, secondList);
+
+        }
 
     }
 
     private static String getFirstWord(Scanner scanner) {
-        System.out.println("Please enter a word or phrase:");
+        System.out.println("Please enter a word or phrase, or type /exit to exit:");
         return scanner.nextLine().toLowerCase();
     }
 
@@ -36,18 +44,18 @@ public class Anagrams {
 
     private static List<Character> convertToList(char[] arrayOfLetters) {
         List<Character> listOfCharacters = new ArrayList<>();
-        for(int i = 0; i < arrayOfLetters.length; i++) {
-            if(arrayOfLetters[i] != ' ') {
+        for (int i = 0; i < arrayOfLetters.length; i++) {
+            if (arrayOfLetters[i] != ' ') {
                 listOfCharacters.add(arrayOfLetters[i]);
             }
         }
         return listOfCharacters;
     }
 
-    private static void sortAndCompare(List<Character> firstList, List<Character> secondList){
+    private static void sortAndCompare(List<Character> firstList, List<Character> secondList) {
         Collections.sort(firstList);
         Collections.sort(secondList);
-        if (firstList.equals(secondList)){
+        if (firstList.equals(secondList)) {
             System.out.println("Yes, that is an anagram!");
         } else {
             System.out.println("Nope, that's not an anagram...");
